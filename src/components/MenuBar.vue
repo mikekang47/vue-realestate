@@ -5,14 +5,25 @@
   </div>
 </template>
 <script>
-  export default {
-    data() {
-      return {
-        menus: ['Home', 'Shop', 'About'],
-      }
+export default {
+  data() {
+    return {
+      menus: ['Home', 'Shop', 'About'],
     }
   }
+}
 </script>
 <style>
+.menu {
+  background: darkslateblue;
+  padding: 15px;
+  border-radius: 5px;
+
+}
+
+.menu a {
+  color: white;
+  padding: 10px;
+}
 
 </style>
