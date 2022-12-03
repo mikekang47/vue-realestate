@@ -6,11 +6,8 @@
       <button @click="this.isModalOpen=false">X</button>
     </div>
   </div>
-
-  <h1>원룸 샵</h1>
-  <div class="menu">
-    <a v-for="menu in menus" :key="menu">{{ menu }}</a>
-  </div>
+  <MenuBar></MenuBar>
+  <Discount></Discount>
   <div v-for="room in products" :key="room">
     <img @click="this.isModalOpen=true; idx=room.id" :src="room.image" class="room-img">
     <h4 @click="this.isModalOpen=true; idx=room.id">{{ room.title }}</h4>
@@ -21,8 +18,9 @@
 </template>
 
 <script>
-
 import data from './post.js';
+import Discount from "@/components/DiscountBanner.vue";
+import MenuBar from "@/components/MenuBar.vue";
 
 export default {
   products: 'App',
@@ -30,13 +28,12 @@ export default {
     return {
       idx: 0,
       counts: Array.from({length: data.length}, () => 0),
-      menus: ['Home', 'Shop', 'About'],
       products: data,
       isModalOpen: false,
 
     }
   },
-  components: {}
+  components: {Discount, MenuBar}
 }
 </script>
 
@@ -48,6 +45,13 @@ export default {
   text-align: center;
   color: #2c3e50;
   margin-top: 60px;
+}
+
+.discount {
+  background: #eee;
+  padding: 10px;
+  margin: 10px;
+  border-radius: 5px;
 }
 
 .menu {
