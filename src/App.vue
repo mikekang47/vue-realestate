@@ -1,12 +1,13 @@
 <template>
   <h1>원룸 샵</h1>
   <div class="menu">
-    <a v-for="menu in menus" :key="menu">{{menu}}</a>
+    <a v-for="menu in menus" :key="menu">{{ menu }}</a>
   </div>
-
-  <div v-for="room in products" :key="room">
-    <p><strong>{{room}}</strong></p>
-    <p>{{dic[room]}}</p>
+  <div v-for="i in 3" :key="i">
+    <p><strong>{{ products[i - 1] }}</strong></p>
+    <p>{{ dic[i - 1] }}</p>
+    <button @click="this.counts[i-1] += 1">허위매물 신고</button>
+    <span>신고수: {{ counts[i - 1] }}</span>
   </div>
 </template>
 
@@ -16,6 +17,7 @@ export default {
   products: 'App',
   data() {
     return {
+      counts: [0, 0, 0],
       menus: ['Home', 'Shop', 'About'],
       products: ['역삼동원룸', '천호동원룸', '상도동원룸'],
       dic: {
