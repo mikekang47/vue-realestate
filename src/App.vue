@@ -1,34 +1,39 @@
 <template>
+  <div v-if="isModalOpen === true" class="black-bg">
+    <div class="white-bg">
+      <h4>{{ products[idx].title }}</h4>
+      <p>{{ products[idx].content }}</p>
+      <button @click="this.isModalOpen=false">X</button>
+    </div>
+  </div>
+
   <h1>원룸 샵</h1>
   <div class="menu">
     <a v-for="menu in menus" :key="menu">{{ menu }}</a>
   </div>
-  <div v-for="i in 3" :key="i">
-    <img :src= "getSrc(i-1)" class="room-img">
-    <p><strong>{{ products[i - 1] }}</strong></p>
-    <p>{{ dic[i - 1] }}</p>
-    <button @click="this.counts[i-1] += 1">허위매물 신고</button>
-    <span>신고수: {{ counts[i - 1] }}</span>
+  <div v-for="room in products" :key="room">
+    <img @click="this.isModalOpen=true; idx=room.id" :src="room.image" class="room-img">
+    <h4 @click="this.isModalOpen=true; idx=room.id">{{ room.title }}</h4>
+    <p>{{ room.price }}</p>
+    <button @click="this.counts[room.id] += 1;">허위매물 신고</button>
+    <span>신고수: {{ counts[room.id] }}</span>
   </div>
 </template>
 
 <script>
 
+import data from './post.js';
+
 export default {
   products: 'App',
   data() {
     return {
-      counts: [0, 0, 0],
-      getSrc: function(index) {
-        return require('./assets/room'+index+'.jpg');
-      },
+      idx: 0,
+      counts: Array.from({length: data.length}, () => 0),
       menus: ['Home', 'Shop', 'About'],
-      products: ['역삼동원룸', '천호동원룸', '상도동원룸'],
-      dic: {
-        역삼동원룸: '50',
-        천호동원룸: '가격은 아무거나',
-        상도동원룸: '가격은 아무거나',
-      }
+      products: data,
+      isModalOpen: false,
+
     }
   },
   components: {}
@@ -60,5 +65,28 @@ export default {
 .room-img {
   width: 100%;
   margin-top: 40px;
+}
+
+body {
+  margin: 0
+}
+
+div {
+  box-sizing: border-box;
+}
+
+.black-bg {
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  position: fixed;
+  padding: 20px;
+}
+
+.white-bg {
+  width: 100%;
+  background: white;
+  border-radius: 8px;
+  padding: 20px;
 }
 </style>
