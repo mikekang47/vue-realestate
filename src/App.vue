@@ -1,8 +1,11 @@
 <template>
-  <ModalVue @closeModal="isModalOpen=false" :room=selected :is-modal-open="isModalOpen" />
+  <Transition name="fade">
+    <ModalVue @closeModal="isModalOpen=false" :room=selected :is-modal-open="isModalOpen"/>
+  </Transition>
+
   <Menu/>
   <Discount/>
-  <Card @openModal="isModalOpen=true" v-for="room in products" :key="room" :room="room"  @modifyRoom="selected=$event"/>
+  <Card @openModal="isModalOpen=true" v-for="room in products" :key="room" :room="room" @modifyRoom="selected=$event"/>
 </template>
 
 <script>
@@ -35,6 +38,30 @@ export default {
   text-align: center;
   color: #2c3e50;
   margin-top: 60px;
+}
+
+.fade-leave-from {
+  opacity: 1;
+}
+
+.fade-leave-to {
+  opacity: 0;
+}
+
+.fade-leave-active {
+  transition: 0.5s;
+}
+
+.fade-enter-from {
+  transform: translateY(-1000px);
+}
+
+.fade-enter-active {
+  transition: all 1s;
+}
+
+.fade-enter-to {
+  transform: translateY(0px);
 }
 
 body {
