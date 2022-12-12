@@ -39,18 +39,18 @@ export default {
       });
     },
     descSort() {
-      this.products.sort((a,b) => {
+      this.products.sort((a, b) => {
         return b.price - a.price;
       });
     },
     alphaSort() {
-      this.products.sort((a,b) => {
-        if(a.title > b.title) return 1;
+      this.products.sort((a, b) => {
+        if (a.title > b.title) return 1;
         else return -1;
       });
     },
     originalSort() {
-      this.products.sort((a,b) => {
+      this.products.sort((a, b) => {
         return a.id - b.id;
       });
     }
