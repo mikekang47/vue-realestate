@@ -5,6 +5,11 @@
 
   <Menu/>
   <Discount/>
+
+  <button @click="ascSort()">가격 낮은 순 정렬</button>
+  <button @click="descSort()">가격 높은 순 정렬</button>
+  <button @click="alphaSort()">가나다 순 정렬</button>
+  <button @click="originalSort()">원래대로 정렬</button>
   <Card @openModal="isModalOpen=true" v-for="room in products" :key="room" :room="room" @modifyRoom="selected=$event"/>
 </template>
 
@@ -20,10 +25,34 @@ export default {
   data() {
     return {
       idx: 0,
+      originalData: [...data],
       counts: Array.from({length: data.length}, () => 0),
       products: data,
       isModalOpen: false,
-      selected: Object
+      selected: Object,
+    }
+  },
+  methods: {
+    ascSort() {
+      this.products.sort((a, b) => {
+        return a.price - b.price;
+      });
+    },
+    descSort() {
+      this.products.sort((a,b) => {
+        return b.price - a.price;
+      });
+    },
+    alphaSort() {
+      this.products.sort((a,b) => {
+        if(a.title > b.title) return 1;
+        else return -1;
+      });
+    },
+    originalSort() {
+      this.products.sort((a,b) => {
+        return a.id - b.id;
+      });
     }
   },
   components: {Card, ModalVue, Discount, Menu}
